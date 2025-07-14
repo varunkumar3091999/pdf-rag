@@ -1,0 +1,12 @@
+langchain_community
+langchain
+langchain_text_splitters
+langchain_huggingface
+langchain_chroma
+langchain_core
+langchain_ollama
+sentence-transformers
+torch
+transformers
+pypdf
+numpy<2
