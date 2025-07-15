@@ -52,12 +52,12 @@ def add_to_chroma(chunks: list[Document]):
     new_chunks.append(chunk)
 
   existing_items = db.get(include=[])
-  existing_ids = set(existing_items["ids"])
   
   print(f"Number of documents in DB: {len(new_chunk_ids)}")
   # for chunk in chunk_id
 
   db.add_documents(new_chunks,ids=new_chunk_ids)
+  return f"Number of documents in DB: {len(new_chunk_ids)}"
   # db.persist()
   
 documents = load_documents()

@@ -10,3 +10,5 @@ torch
 transformers
 pypdf
 numpy<2
+Flask
+flasgger
