@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flasgger import Swagger
 
 
+from rag import query_rag
 from read_pdf import add_to_chroma, load_documents, split_documents
 
 app = Flask(__name__)
@@ -68,6 +69,52 @@ def upload_pdf():
   
   print(result, "resulttt")
   return jsonify({"message": f"PDF uploaded and indexed successfully!,{result}"})
+
+
+@app.route('/query', methods=["POST"])
+def get_response():
+  """
+    Submit a query to retrieve relevant PDF content
+    ---
+    consumes:
+      - application/json
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            question:
+              type: string
+              example: "How much math do you need to know to be a machine learning engineer?"
+    responses:
+      200:
+        description: Successful response with relevant chunks
+        examples:
+          application/json: 
+            {
+              "matches": [
+                {
+                  "score": 0.87,
+                  "text": "Biographical Characteristic: Age, Gender, Religion, Physical Characteristics, Marital Status, Experience, Intelligence, Ability, etc."
+                }
+              ]
+            }
+      400:
+        description: Invalid request
+        examples:
+          application/json: {"error": "No question provided"}
+  """
+  
+  body = request.get_json()
+  print(body, "bodyyy")
+  question = body["question"]
+  response = query_rag(question)
+  
+  return jsonify({"response": f"{response}"})
+  
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -7,7 +7,7 @@ from langchain_ollama import OllamaLLM
 model = OllamaLLM(model='mistral')
 
 db = Chroma(
-  persist_directory="all-my-documents", embedding_function=get_embedding_function()
+  persist_directory="database", embedding_function=get_embedding_function()
 )
 
 
@@ -27,10 +27,10 @@ def query_rag(query_text):
   response_text = model.invoke(prompt)
   return response_text
 
-while True:
-  query = input("💬 Ask me something (or type 'exit' to quit): ")
-  if query.lower() == "exit":
-      break
-  print("Loading...")
-  response = query_rag(query)
-  print(response)
+# while True:
+#   query = input("💬 Ask me something (or type 'exit' to quit): ")
+#   if query.lower() == "exit":
+#       break
+#   print("Loading...")
+#   response = query_rag(query)
+#   print(response)
