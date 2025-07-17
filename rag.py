@@ -1,3 +1,4 @@
+from flask import jsonify
 from langchain_chroma import Chroma
 from read_pdf import get_embedding_function
 from langchain_core.prompts import ChatPromptTemplate
@@ -25,7 +26,7 @@ def query_rag(query_text):
   prompt = prompt_template.format(context=context_text, query_text=query_text)
     
   response_text = model.invoke(prompt)
-  return response_text
+  return jsonify({"answer": response_text, "meta_data": results})
 
 # while True:
 #   query = input("💬 Ask me something (or type 'exit' to quit): ")
