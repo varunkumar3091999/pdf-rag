@@ -52,7 +52,6 @@ def upload_pdf():
         examples:
           application/json: {"error": "No file uploaded"}
   """
-  print(request.files, "files")
   if 'file' not in request.files:
     return jsonify({"error": "No file uploaded"}), 400
   
@@ -67,7 +66,6 @@ def upload_pdf():
   chunks = split_documents(documents)
   result = add_to_chroma(chunks)
   
-  print(result, "resulttt")
   return jsonify({"message": f"PDF uploaded and indexed successfully!,{result}"})
 
 
@@ -108,11 +106,10 @@ def get_response():
   """
   
   body = request.get_json()
-  print(body, "bodyyy")
   question = body["question"]
   response = query_rag(question)
   
-  return jsonify({"response": f"{response}"})
+  return response
   
 
 

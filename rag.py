@@ -3,6 +3,8 @@ from langchain_chroma import Chroma
 from read_pdf import get_embedding_function
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
+import json
+
 
 
 model = OllamaLLM(model='mistral')
@@ -26,7 +28,17 @@ def query_rag(query_text):
   prompt = prompt_template.format(context=context_text, query_text=query_text)
     
   response_text = model.invoke(prompt)
-  return jsonify({"answer": response_text, "meta_data": results})
+
+  response_data = {
+    "answer": response_text,
+    "matches": [{
+        "text": doc.page_content,
+        "metadata": doc.metadata,
+        "score": score
+    } for doc, score in results]
+  }
+  
+  return json.dumps(response_data, indent=2)
 
 # while True:
 #   query = input("💬 Ask me something (or type 'exit' to quit): ")
