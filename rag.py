@@ -35,7 +35,7 @@ def query_rag(query_text):
         "text": doc.page_content,
         "metadata": doc.metadata,
         "score": score
-    } for doc, score in results]
+    } for doc, score in reversed(results)]
   }
   
   return json.dumps(response_data, indent=2)
