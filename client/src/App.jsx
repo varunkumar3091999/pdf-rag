@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Query />} />
-        <Route page="/upload" element={<UploadPdf />} />
+        <Route path="/upload" element={<UploadPdf />} />
       </Routes>
     </BrowserRouter>
   );

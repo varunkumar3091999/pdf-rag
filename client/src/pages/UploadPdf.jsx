@@ -1,5 +1,5 @@
 const UploadPdf = () => {
-  return "Upload Page";
+  return <>"Upload Page"</>;
 };
 
 export default UploadPdf;
