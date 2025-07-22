@@ -2,10 +2,11 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Flex, message, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import type { UploadProps } from "antd";
 
 const Query = () => {
   const [file, setFile] = useState(null);
-  const uploadProps = {
+  const uploadProps: UploadProps = {
     name: "file",
     action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
     headers: {
@@ -15,16 +16,13 @@ const Query = () => {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
       }
-      console.log(info, "info");
       if (info.file.status === "done") {
-        setFile(info.file);
         message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
   };
-
   // const uploadPdf = async () => {
   //   try {
   //     const formData = new FormData();
