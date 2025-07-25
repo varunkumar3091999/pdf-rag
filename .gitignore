@@ -2,3 +2,4 @@ environment
 database
 .DS_Store
 __pycache__
+excel_data.db

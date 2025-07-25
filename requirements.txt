@@ -12,3 +12,5 @@ pypdf
 numpy<2
 Flask
 flasgger
+pandas
+openpyxl
